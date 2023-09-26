@@ -1,0 +1,15 @@
+{
+  "name": "starcitizen-cache-manager",
+  "version": "0.1.0",
+  "description": "An app to manage StarCitizen's cache folders",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^26.2.2"
+  }
+}
