@@ -4,6 +4,8 @@ const fs = require('node:fs');
 const appLogger = require('./logger');
 const cacheManager = require('./cache_manager');
 
+const appSettings = require('./app_settings');
+
 const appVersion = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json"))
 ).version;
