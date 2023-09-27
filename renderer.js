@@ -1,5 +1,10 @@
-const btn320 = document.getElementById('btn-320')
-btn320.addEventListener('click', async () => {
-  const result = await window.cacheManager.delete('3.20');
-  console.log(result);
-})
+const deleteContainer = document.getElementById('delete-buttons');
+const deletionButtons = deleteContainer.getElementsByTagName('button');
+
+for (btn of deletionButtons) {
+  btn.addEventListener('click', async () => {
+    const scVersion = btn.dataset.scVersion
+    const result = await window.cacheManager.delete(scVersion);
+    console.log(JSON.stringify(result));
+  });
+}

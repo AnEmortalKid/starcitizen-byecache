@@ -7,9 +7,18 @@ function getAppData() {
     (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")
 }
 
+/**
+ * Performs cache deletion for a given version
+ * 
+ * @param {*} event the electron event
+ * @param {string} scVersion the version of starcitizen
+ * @returns {*} result.success true if the operation succeeded
+ * @returns {*} result.deletedPaths set of paths that were deleted
+ */
 function deleteCaches(event, scVersion) {
   console.log('Deleting cache for version: ', scVersion);
 
+  // Add more versions here if they switch things on us
   switch (scVersion) {
     case "3.20":
       return deleteCaches320();
@@ -53,7 +62,6 @@ function deleteCaches320() {
     deletedPaths
   };
 }
-
 
 module.exports = {
   deleteCaches,
