@@ -7,9 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnEmortalKid/starcitizen-byecache.git"
+  },
+  "author": "Jan Monterrubio",
   "license": "ISC",
   "devDependencies": {
     "electron": "^26.2.2"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.8",
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^2.0.1"
   }
 }
