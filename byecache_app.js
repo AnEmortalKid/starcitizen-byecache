@@ -37,6 +37,7 @@ function runApp() {
   app.whenReady().then(() => {
 
     ipcMain.handle('cacheManager.delete', cacheManager.deleteCaches);
+    ipcMain.handle('cacheManager.shaders.delete', cacheManager.deleteGameShaders);
 
     createWindow()
 

@@ -1,10 +1,5 @@
-const deleteContainer = document.getElementById('delete-buttons');
-const deletionButtons = deleteContainer.getElementsByTagName('button');
-
-for (btn of deletionButtons) {
-  btn.addEventListener('click', async () => {
-    const scVersion = btn.dataset.scVersion
-    const result = await window.cacheManager.delete(scVersion);
-    console.log(JSON.stringify(result));
-  });
-}
+const deleteShaders = document.getElementById('game-shaders');
+deleteShaders.addEventListener('click', async () => {
+  const result = await window.cacheManager.deleteShaders();
+  console.log(JSON.stringify(result));
+});
