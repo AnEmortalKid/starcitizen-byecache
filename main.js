@@ -2,9 +2,16 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
 const fs = require('node:fs')
 
+const cacheManager = require('./cache_manager')
+
 const appVersion = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json"))
 ).version;
+
+// TODO remove the tools bar if not dev
+// TODO squirrel loader
+
+
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -22,10 +29,6 @@ const createWindow = () => {
   });
 }
 
-function deleteCaches(event, scVersion) {
-  console.log('scVersion ', scVersion);
-}
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -34,7 +37,7 @@ app.on('window-all-closed', () => {
 
 app.whenReady().then(() => {
 
-  ipcMain.on('cacheManager.delete', deleteCaches);
+  ipcMain.handle('cacheManager.delete', cacheManager.deleteCaches);
 
   createWindow()
 
