@@ -1,7 +1,7 @@
 {
-  "name": "starcitizen-cache-manager",
+  "name": "starcitizen-byecache",
   "version": "0.1.0",
-  "description": "An app to manage StarCitizen's cache folders",
+  "description": "An app to delete StarCitizen's cache folders based on version.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

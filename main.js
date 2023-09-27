@@ -10,7 +10,9 @@ const appVersion = JSON.parse(
 
 // TODO remove the tools bar if not dev
 // TODO squirrel loader
-
+// TODO do the file exit stuff we did in avocapture
+// TODo put this in a app js file main handles the squirrel js stuff (autoupdater)
+// rename to byecache
 
 
 const createWindow = () => {
