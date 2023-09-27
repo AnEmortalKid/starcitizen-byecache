@@ -3,16 +3,27 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+
   <title>Hello World!</title>
 </head>
 
+<head>
+  <title>StarCitizen Cache Manager</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+  <link rel="stylesheet" href="./src/assets/css/w3.css">
+  <link rel="stylesheet" href="./src/assets/css/w3-theme-indigo.css">
+  <link rel="stylesheet" href="./src/assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+</head>
+
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
-  Chromium <span id="chrome-version"></span>,
-  and Electron <span id="electron-version"></span>.
+  <div class="w3-center">
+    <div class="w3-bar">
+      <button class="w3-button w3-theme-d2" id="btn-320">Delete 3.20 Caches</button>
+    </div>
+  </div>
 </body>
 
 <script src="./renderer.js"></script>
