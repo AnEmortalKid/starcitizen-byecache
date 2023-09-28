@@ -13,6 +13,13 @@ btn.addEventListener('click', async () => {
   window.byecache.installs.add(filePath);
 })
 
+// each install will have
+
+// file location (backup location) button to clear cache , button to remove location
+// default backups
+
+// TODO add tag based on filepath (LIVE/PTU/EPTU)
+
 // TODO make better rows
 window.byecache.installs.get().then((res) => {
   const parentContainer = document.getElementById('installs-container');
