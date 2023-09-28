@@ -21,7 +21,7 @@
 
   <div class="w3-row">
 
-    <div class="w3-col s6 w3-center">
+    <div class="w3-col s8 w3-center">
       <div class="w3-card-4">
         <header class="w3-container w3-theme-d5 w3-center">
           <h1>User</h1>
@@ -33,10 +33,38 @@
             Add install location <i class="fa fa-folder-open" aria-hidden="true"></i>
           </button>
         </div>
+
+        <div class="w3-container" id="installs-container">
+
+          <div class="w3-row-padding w3-section">
+
+            <div class="w3-row">
+              <div class="w3-col s11">
+                <input class="w3-input w3-border" name="first" type="text" placeholder="First Name" readonly="readonly">
+              </div>
+              <div class="w3-rest">
+                <div class="w3-col s6"><i class="w3-xxlarge fa fa-trash"></i></div>
+                <div class="w3-col s6"><i class="w3-xxlarge fa fa-minus-square"></i></div>
+              </div>
+            </div>
+
+            <div class="w3-row-padding">
+              <div class="w3-col s1"><i class="w3-xxlarge fa fa-hdd-o"></i></div>
+              <div class="w3-rest">
+                <input class="w3-input w3-border" name="first" type="text" placeholder="Backup location"
+                  readonly="readonly">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
       </div>
     </div>
 
-    <div class="w3-col s6 w3-center">
+    <div class="w3-col s4 w3-center">
       <div class="w3-card-4">
         <header class="w3-container w3-theme-d5 w3-center">
           <h1>Shaders</h1>
@@ -46,9 +74,7 @@
           <button class="w3-button w3-theme-d2" id="game-shaders">Delete Game Shaders</button>
         </div>
 
-        <div class="w3-bar" id="installs-container">
 
-        </div>
 
       </div>
     </div>

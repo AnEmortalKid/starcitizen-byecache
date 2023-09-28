@@ -23,12 +23,13 @@ btn.addEventListener('click', async () => {
 // TODO make better rows
 window.byecache.installs.get().then((res) => {
   const parentContainer = document.getElementById('installs-container');
-  for (var p of res) {
+  for (var install of res) {
     // probably need to safe format paths for display but keep
     // the data safe
     // avocapture does this iirc
-    const rowData = document.createElement('span');
-    rowData.textContent = p;
-    parentContainer.appendChild(rowData);
+    //const rowData = document.createElement('span');
+    //rowData.textContent = install.location;
+    console.log(JSON.stringify(install))
+    //parentContainer.appendChild(rowData);
   }
 });
