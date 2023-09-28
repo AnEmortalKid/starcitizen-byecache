@@ -13,4 +13,12 @@ btn.addEventListener('click', async () => {
   window.byecache.installs.add(filePath);
 })
 
-window.byecache.installs.get().then((res) => console.log(res));
+// TODO make better rows
+window.byecache.installs.get().then((res) => {
+  const parentContainer = document.getElementById('installs-container');
+  for (var p of res) {
+    const rowData = document.createElement('span');
+    rowData.textContent = p;
+    parentContainer.appendChild(rowData);
+  }
+});
