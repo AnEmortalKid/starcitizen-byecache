@@ -34,32 +34,40 @@
           </button>
         </div>
 
-        <div class="w3-container" id="installs-container">
 
-          <div class="w3-row-padding w3-section">
+        <div class="w3-bar-block" id="installs-container">
 
-            <div class="w3-row">
-              <div class="w3-col s11">
-                <input class="w3-input w3-border" name="first" type="text" placeholder="First Name" readonly="readonly">
-              </div>
-              <div class="w3-rest">
-                <div class="w3-col s6"><i class="w3-xxlarge fa fa-trash"></i></div>
-                <div class="w3-col s6"><i class="w3-xxlarge fa fa-minus-square"></i></div>
+          <div class="w3-bar-item w3-hide" id="install-template">
+            <div class="w3-row w3-padding-small">
+              <span class="w3-tag w3-padding-small w3-round w3-theme-d2 w3-left">
+                LIVE
+              </span>
+              <div class="w3-col s2 w3-right">
+                <div class="w3-col s6 w3-center">
+                  <i class="w3-xxlarge fa fa-minus-square"></i>
+                </div>
               </div>
             </div>
-
-            <div class="w3-row-padding">
-              <div class="w3-col s1"><i class="w3-xxlarge fa fa-hdd-o"></i></div>
-              <div class="w3-rest">
-                <input class="w3-input w3-border" name="first" type="text" placeholder="Backup location"
+            <div class="w3-row w3-padding-small">
+              <div class="w3-col s10">
+                <input class="w3-input w3-border" name="location" type="text" placeholder="Install Location"
                   readonly="readonly">
+              </div>
+              <div class="w3-col s2">
+                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-trash"></i></div>
+              </div>
+            </div>
+            <div class="w3-row w3-padding-small">
+              <div class="w3-col s10">
+                <input class="w3-input w3-border" name="backup" type="text" placeholder="Backup Location"
+                  readonly="readonly">
+              </div>
+              <div class="w3-col s2">
+                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-hdd-o"></i></div>
               </div>
             </div>
           </div>
-
         </div>
-
-
 
       </div>
     </div>
