@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 const appLogger = require('./logger');
 const cacheManager = require('./cache_manager');
+const installsManager = require('./installs_manager');
 
 const appSettings = require('./app_settings');
 
@@ -10,6 +11,18 @@ const appVersion = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json"))
 ).version;
 
+
+let mainWindow;
+
+async function selectDirectory() {
+  const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  });
+
+  if (!canceled) {
+    return filePaths[0]
+  }
+}
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -37,11 +50,17 @@ function runApp() {
   })
 
   app.whenReady().then(() => {
-
-    ipcMain.handle('cacheManager.delete', cacheManager.deleteCaches);
     ipcMain.handle('cacheManager.shaders.delete', cacheManager.deleteGameShaders);
+    ipcMain.handle('directory.select', selectDirectory);
+    ipcMain.handle('installs.add', (evt, path) => {
+      installsManager.addInstallLocation(path)
+    });
+    ipcMain.handle('installs.remove', (evt, path) => {
+      installsManager.removeInstallLocation(path)
+    });
+    ipcMain.handle('installs.get', installsManager.getInstallLocations);
 
-    createWindow()
+    mainWindow = createWindow()
 
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) {
