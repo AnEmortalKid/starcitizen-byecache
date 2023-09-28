@@ -17,6 +17,9 @@ btn.addEventListener('click', async () => {
 window.byecache.installs.get().then((res) => {
   const parentContainer = document.getElementById('installs-container');
   for (var p of res) {
+    // probably need to safe format paths for display but keep
+    // the data safe
+    // avocapture does this iirc
     const rowData = document.createElement('span');
     rowData.textContent = p;
     parentContainer.appendChild(rowData);
