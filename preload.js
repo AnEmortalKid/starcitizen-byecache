@@ -17,7 +17,9 @@ const directoryAPI = {
 const installsAPI = {
   add: (path) => ipcRenderer.invoke('installs.add', path),
   remove: (path) => ipcRenderer.invoke('installs.remove', path),
-  get: () => ipcRenderer.invoke('installs.get')
+  get: () => ipcRenderer.invoke('installs.get'),
+  setBackup: (id, path) => ipcRenderer.invoke('installs.backup.add', id, path),
+  removeBackup: (id) => ipcRenderer.invoke('installs.backup.remove', id)
 }
 
 contextBridge.exposeInMainWorld('byecache', {

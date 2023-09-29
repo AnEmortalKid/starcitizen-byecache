@@ -52,6 +52,7 @@ function runApp() {
   app.whenReady().then(() => {
     ipcMain.handle('cacheManager.shaders.delete', cacheManager.deleteGameShaders);
     ipcMain.handle('directory.select', selectDirectory);
+
     ipcMain.handle('installs.add', (evt, path) => {
       installsManager.addInstallLocation(path)
     });
@@ -59,6 +60,8 @@ function runApp() {
       installsManager.removeInstallLocation(path)
     });
     ipcMain.handle('installs.get', installsManager.getInstallLocations);
+    ipcMain.handle('installs.backup.add', (evt, id, path) => installsManager.setBackup(id, path));
+    ipcMain.handle('installs.backup.remove', (evt, id) => installsManager.removeBackup(id));
 
     mainWindow = createWindow()
 

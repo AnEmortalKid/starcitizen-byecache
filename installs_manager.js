@@ -10,6 +10,10 @@ function findByLocation(installs, folderPath) {
   return installs.find((elem) => elem.location === folderPath);
 }
 
+function findById(installs, id) {
+  return installs.find((elem) => elem.id === id);
+}
+
 function addInstallLocation(folderPath) {
   // todo add whether updated or not
 
@@ -47,8 +51,37 @@ function getInstallLocations() {
   return appSettings.get(locationsKey, []);
 }
 
+function setBackup(installId, backupPath) {
+
+  const installs = appSettings.get(locationsKey, []);
+
+  const found = findById(installs, installId);
+  if (!found) {
+    // TODO return some status or a filter or something
+    return false;
+  }
+
+  found.backup = backupPath;
+  appSettings.set(locationsKey, installs);
+}
+
+function removeBackup(installId) {
+  const installs = appSettings.get(locationsKey, []);
+
+  const found = findById(installs, installId);
+  if (!found) {
+    // TODO return some status or a filter or something
+    return false;
+  }
+
+  delete found.backup
+  appSettings.set(locationsKey, installs);
+}
+
 module.exports = {
   addInstallLocation,
   removeInstallLocation,
-  getInstallLocations
+  getInstallLocations,
+  setBackup,
+  removeBackup
 }
