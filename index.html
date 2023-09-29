@@ -39,31 +39,31 @@
 
           <div class="w3-bar-item w3-hide" id="install-template">
             <div class="w3-row w3-padding-small">
-              <span class="w3-tag w3-padding-small w3-round w3-theme-d2 w3-left">
-                LIVE
+              <span class="w3-tag w3-padding-small w3-round w3-theme-d2 w3-left" data-kind="environment">
+                ENV
               </span>
               <div class="w3-col s2 w3-right">
                 <div class="w3-col s6 w3-center">
-                  <i class="w3-xxlarge fa fa-minus-square"></i>
+                  <i class="w3-xxlarge fa fa-minus-square" data-kind="remove-install"></i>
                 </div>
               </div>
             </div>
             <div class="w3-row w3-padding-small">
               <div class="w3-col s10">
                 <input class="w3-input w3-border" name="location" type="text" placeholder="Install Location"
-                  readonly="readonly">
+                  readonly="readonly" data-kind="install-location">
               </div>
               <div class="w3-col s2">
-                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-trash"></i></div>
+                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-trash" data-kind="purge-install"></i></div>
               </div>
             </div>
             <div class="w3-row w3-padding-small">
               <div class="w3-col s10">
                 <input class="w3-input w3-border" name="backup" type="text" placeholder="Backup Location"
-                  readonly="readonly">
+                  readonly="readonly" data-kind="backup-location">
               </div>
               <div class="w3-col s2">
-                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-hdd-o"></i></div>
+                <div class="w3-col s6 w3-center"><i class="w3-xxlarge fa fa-hdd-o" data-kind="select-backup"></i></div>
               </div>
             </div>
           </div>
