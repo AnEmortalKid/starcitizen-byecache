@@ -15,8 +15,8 @@
       content="default-src 'self'; script-src 'self'"
     />
     <link rel="stylesheet" href="./assets/css/w3.css" />
-    <link rel="stylesheet" href="./assets/css/w3-theme-indigo.css" />
-    <link rel="stylesheet" href="./assets/css/fa-theme.css" />
+    <link rel="stylesheet" href="./assets/css/w3-theme.css" />
+    <link rel="stylesheet" href="./assets/css/extras.css" />
     <link
       rel="stylesheet"
       href="./assets/font-awesome-4.7.0/css/font-awesome.min.css"
@@ -24,6 +24,18 @@
   </head>
 
   <body>
+    <div
+      id="alert-container"
+      class="w3-panel w3-card-4 w3-round w3-padding-small w3-margin w3-display-container w3-hide"
+    >
+      <span id="close-alert" class="w3-btn w3-large w3-display-topright"
+        >&times;</span
+      >
+      <h4 id="alert-message" class="w3-left">
+        Red often indicates a dangerous or negative situation.
+      </h4>
+    </div>
+
     <div class="w3-row">
       <div class="w3-col s8 w3-center">
         <div class="w3-card-4">
@@ -123,7 +135,7 @@
 
           <div class="w3-container w3-padding-small">
             <button
-              class="w3-button w3-theme-action"
+              class="w3-button w3-theme-action w3-hover-theme"
               type="button"
               id="game-shaders"
             >

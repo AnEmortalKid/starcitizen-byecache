@@ -1,0 +1,19 @@
+.fa-btn-action {
+  color: #172531
+}
+
+.fa-btn-action:hover {
+  color: #2e4a62
+}
+
+/* w3-flat-pomegranate */
+.alert-error {
+  color: #fff !important;
+  background-color: #c0392b !important
+}
+
+/* w3-flat-nephritis */
+.alert-success {
+  color: #fff !important;
+  background-color: #27ae60 !important
+}

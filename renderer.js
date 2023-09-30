@@ -7,6 +7,37 @@ function findKind(containerElement, kindValue) {
   return containerElement.querySelector(`[data-kind="${kindValue}"]`);
 }
 
+const alertContainer = document.getElementById("alert-container");
+const alertMessage = document.getElementById("alert-message");
+
+var alertTimeout;
+function hideAlert() {
+  alertContainer.classList.add("w3-hide");
+  alertContainer.classList.remove("alert-success");
+  alertContainer.classList.remove("alert-error");
+
+  if (alertTimeout) {
+    clearTimeout(alertTimeout);
+    alertTimeout = null;
+  }
+}
+alertContainer.addEventListener("click", hideAlert);
+
+function displayErrorAlert(message) {
+  alertContainer.classList.add("alert-error");
+  alertContainer.classList.remove("w3-hide");
+  alertMessage.textContent = message;
+}
+
+function displaySuccessAlert(message) {
+  alertContainer.classList.add("alert-success");
+  alertContainer.classList.remove("w3-hide");
+  alertMessage.textContent = message;
+  alertTimeout = setTimeout(function () {
+    hideAlert();
+  }, 1500);
+}
+
 const parentContainer = document.getElementById("installs-container");
 const template = document.getElementById("install-template");
 
@@ -56,11 +87,13 @@ async function addInstall(path) {
   const result = await window.byecache.installs.add(filePath);
   console.log("[addInstall] response", JSON.stringify(result));
 
-  // TODO error => show error message
-
   // succeeded and actually added
   if (result.success && result.data) {
     addInstallNode(result.data);
+  }
+
+  if (!result.success) {
+    displayErrorAlert(result.error);
   }
 }
 
@@ -74,7 +107,11 @@ async function removeInstall(id) {
 }
 
 async function purgeInstall(id) {
+  // todo get info to display ENV
   const result = await window.byecache.installs.purge(id);
+  if (result.success) {
+    displaySuccessAlert("USER directory purged.");
+  }
 }
 
 function setBackupValue(backupInput, value) {
