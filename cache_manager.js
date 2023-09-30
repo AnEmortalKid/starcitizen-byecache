@@ -35,7 +35,7 @@ function deleteGameShaders() {
   const shaderParent = path.resolve(getLocalAppData(), "Star Citizen");
 
   const deletedPaths = [];
-  if (utils.safeDeleteDir(shaderParent)) {
+  if (utils.safeDeleteDirectoryContents(shaderParent)) {
     deletedPaths.push(shaderParent);
   }
 
