@@ -9,7 +9,7 @@ require("update-electron-app")({
   logger: log.scope("update-electron-app"),
 });
 
-const bycacheApp = require('./byecache_app');
+const bycacheApp = require("./byecache_app");
 
 // // TODO squirrel loader
 

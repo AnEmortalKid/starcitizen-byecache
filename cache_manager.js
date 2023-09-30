@@ -1,19 +1,26 @@
+const path = require("node:path");
+const fs = require("node:fs");
+const appLogger = require("./logger");
 
-const path = require('node:path');
-const fs = require('node:fs');
-const appLogger = require('./logger');
-
-const utils = require('./utils')
+const utils = require("./utils");
 
 function getAppData() {
-  return process.env.APPDATA ||
-    (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")
+  return (
+    process.env.APPDATA ||
+    (process.platform == "darwin"
+      ? process.env.HOME + "/Library/Preferences"
+      : process.env.HOME + "/.local/share")
+  );
 }
 
 function getLocalAppData() {
-  return process.env.LOCALAPPDATA ||
+  return (
+    process.env.LOCALAPPDATA ||
     // TODO mac has way more folders apparently
-    (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")
+    (process.platform == "darwin"
+      ? process.env.HOME + "/Library/Preferences"
+      : process.env.HOME + "/.local/share")
+  );
 }
 
 /**
@@ -25,16 +32,16 @@ function deleteGameShaders() {
    *   https://robertsspaceindustries.com/comm-link//19456-Star-Citizen-Alpha-3200
    */
   // hope location didn't change on us but if it does we can use a switch
-  const shaderParent = path.resolve(getLocalAppData(), 'Star Citizen')
+  const shaderParent = path.resolve(getLocalAppData(), "Star Citizen");
 
-  const deletedPaths = []
+  const deletedPaths = [];
   if (utils.safeDeleteDir(shaderParent)) {
-    deletedPaths.push(shaderParent)
+    deletedPaths.push(shaderParent);
   }
 
-  return { success: true, deletedPaths }
+  return { success: true, deletedPaths };
 }
 
 module.exports = {
-  deleteGameShaders
-}
+  deleteGameShaders,
+};

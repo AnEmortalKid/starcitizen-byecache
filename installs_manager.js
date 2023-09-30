@@ -1,15 +1,14 @@
+const { uuid } = require("uuidv4");
+const path = require("node:path");
+const fs = require("node:fs");
 
-const { uuid } = require('uuidv4');
-const path = require('node:path');
-const fs = require('node:fs');
+const appSettings = require("./app_settings");
+const utils = require("./utils");
 
-const appSettings = require('./app_settings');
-const utils = require('./utils');
-
-const locationsKey = 'installs';
+const locationsKey = "installs";
 
 // 3.20 locations still contain these
-const MAPPINGS_SUBDIRS = "USER/Client/0/Controls/Mappings"
+const MAPPINGS_SUBDIRS = "USER/Client/0/Controls/Mappings";
 const USER_SUBDIR = "USER";
 
 function findByLocation(installs, folderPath) {
@@ -19,7 +18,6 @@ function findByLocation(installs, folderPath) {
 function findById(installs, id) {
   return installs.find((elem) => elem.id === id);
 }
-
 
 /**
  * Install definition.
@@ -44,11 +42,11 @@ function findById(installs, id) {
  */
 function addInstallLocation(folderPath) {
   // require its the parent of the user folder
-  const userPath = path.resolve(folderPath, 'USER')
+  const userPath = path.resolve(folderPath, "USER");
   if (!fs.existsSync(userPath)) {
     return {
       success: false,
-      error: "Directory selected does not contain a USER folder."
+      error: "Directory selected does not contain a USER folder.",
     };
   }
 
@@ -57,20 +55,21 @@ function addInstallLocation(folderPath) {
   const existing = findByLocation(installs, folderPath);
   if (existing) {
     return {
-      success: true
+      success: true,
     };
   }
 
   const newInstall = {
     id: uuid(),
     location: folderPath,
-  }
+  };
   installs.push(newInstall);
   appSettings.set(locationsKey, installs);
 
   return {
-    success: true, data: newInstall
-  }
+    success: true,
+    data: newInstall,
+  };
 }
 
 /**
@@ -80,7 +79,7 @@ function addInstallLocation(folderPath) {
 function removeInstallLocation(id) {
   const installs = appSettings.get(locationsKey, []);
 
-  const updated = installs.filter(item => item.id !== id);
+  const updated = installs.filter((item) => item.id !== id);
   appSettings.set(locationsKey, updated);
 }
 
@@ -92,7 +91,7 @@ function getInstallLocations() {
 }
 
 /**
- * Associates the provided directory as the backup location for an install 
+ * Associates the provided directory as the backup location for an install
  * @param {string} installId identifier for the {@link InstallManagerInstall install}
  * @param {string} backupPath path to the backup directory for this install
  * @returns {...InstallManagerResponse} {@link InstallManagerResponse response} with the result of the operation
@@ -102,7 +101,10 @@ function setBackup(installId, backupPath) {
 
   const found = findById(installs, installId);
   if (!found) {
-    return { success: false, error: "The provided install could not be found." };
+    return {
+      success: false,
+      error: "The provided install could not be found.",
+    };
   }
 
   found.backup = backupPath;
@@ -110,8 +112,8 @@ function setBackup(installId, backupPath) {
 
   return {
     success: true,
-    data: found
-  }
+    data: found,
+  };
 }
 
 /**
@@ -124,21 +126,24 @@ function removeBackup(installId) {
 
   const found = findById(installs, installId);
   if (!found) {
-    return { success: false, error: "The provided install could not be found." };
+    return {
+      success: false,
+      error: "The provided install could not be found.",
+    };
   }
 
-  delete found.backup
+  delete found.backup;
   appSettings.set(locationsKey, installs);
 
   return {
     success: true,
-    data: found
-  }
+    data: found,
+  };
 }
 
 /**
  * Removes the USER directory contents for a givne install
- * 
+ *
  * @param {string} installId - the identifier of {@link InstallManagerInstall install}
  * @returns {...InstallManagerResponse} {@link InstallManagerResponse response} with the result of the operation
  */
@@ -147,7 +152,10 @@ function purgeInstall(installId) {
 
   const found = findById(installs, installId);
   if (!found) {
-    return { success: false, error: "The provided install could not be found." };
+    return {
+      success: false,
+      error: "The provided install could not be found.",
+    };
   }
 
   // only backup if we specified stuff
@@ -159,7 +167,7 @@ function purgeInstall(installId) {
   const userDIR = path.resolve(found.location, USER_SUBDIR);
   utils.safeDeleteDirectoryContents(userDIR);
 
-  return { success: true }
+  return { success: true };
 }
 
 function backupFiles(location, backup) {
@@ -178,5 +186,5 @@ module.exports = {
   getInstallLocations,
   setBackup,
   removeBackup,
-  purgeInstall
-}
+  purgeInstall,
+};

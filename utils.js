@@ -1,6 +1,6 @@
-const path = require('node:path');
-const fs = require('node:fs');
-const appLogger = require('./logger');
+const path = require("node:path");
+const fs = require("node:fs");
+const appLogger = require("./logger");
 
 /**
  * Deletes a directory for us
@@ -10,8 +10,8 @@ const appLogger = require('./logger');
 function safeDeleteDir(dirPath) {
   // ensure we don't delete the wrong dir
   if (dirPath && fs.existsSync(dirPath)) {
-    appLogger.info('Deleting directory: ', dirPath);
-    fs.rmSync(dirPath, { recursive: true })
+    appLogger.info("Deleting directory: ", dirPath);
+    fs.rmSync(dirPath, { recursive: true });
     return true;
   }
 
@@ -24,7 +24,7 @@ function safeDeleteDirectoryContents(dirPath) {
   // get file types to determine what we do
   const dirEntries = fs.readdirSync(dirLocation, { withFileTypes: true });
 
-  dirEntries.forEach(entry => {
+  dirEntries.forEach((entry) => {
     const entryPath = path.resolve(dirLocation, entry.name);
     if (entry.isDirectory()) {
       safeDeleteDir(entryPath);
@@ -34,10 +34,9 @@ function safeDeleteDirectoryContents(dirPath) {
       fs.rmSync(entryPath);
     }
   });
-
 }
 
 module.exports = {
   safeDeleteDir,
-  safeDeleteDirectoryContents
-}
+  safeDeleteDirectoryContents,
+};
