@@ -5,8 +5,6 @@ const appLogger = require("./logger");
 const cacheManager = require("./cache_manager");
 const installsManager = require("./installs_manager");
 
-const appSettings = require("./app_settings");
-
 const appVersion = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json")),
 ).version;
@@ -26,7 +24,7 @@ async function selectDirectory() {
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -37,6 +35,9 @@ const createWindow = () => {
   win.webContents.on("did-finish-load", () => {
     win.setTitle("StarCitizen Byecache v" + appVersion);
   });
+
+  // TODO if dev
+  win.removeMenu();
 };
 
 function runApp() {
