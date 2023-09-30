@@ -3,6 +3,8 @@ const path = require('node:path');
 const fs = require('node:fs');
 const appLogger = require('./logger');
 
+const utils = require('./utils')
+
 function getAppData() {
   return process.env.APPDATA ||
     (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")
@@ -12,22 +14,6 @@ function getLocalAppData() {
   return process.env.LOCALAPPDATA ||
     // TODO mac has way more folders apparently
     (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")
-}
-
-/**
- * Deletes a directory for us
- * @param {string} dirPath the path to the directory
- * @returns true if a path was deleted, false otherwise
- */
-function safeDeleteDir(dirPath) {
-  // ensure we don't delete the wrong dir
-  if (dirPath && fs.existsSync(dirPath)) {
-    appLogger.info('Deleting directory: ', dirPath);
-    fs.rmSync(dirPath, { recursive: true })
-    return true;
-  }
-
-  return false;
 }
 
 /**
@@ -42,7 +28,7 @@ function deleteGameShaders() {
   const shaderParent = path.resolve(getLocalAppData(), 'Star Citizen')
 
   const deletedPaths = []
-  if (safeDeleteDir(shaderParent)) {
+  if (utils.safeDeleteDir(shaderParent)) {
     deletedPaths.push(shaderParent)
   }
 

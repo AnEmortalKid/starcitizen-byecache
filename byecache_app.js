@@ -54,12 +54,15 @@ function runApp() {
     ipcMain.handle('directory.select', selectDirectory);
 
     ipcMain.handle('installs.add', (evt, path) => {
-      installsManager.addInstallLocation(path)
+      return installsManager.addInstallLocation(path)
     });
-    ipcMain.handle('installs.remove', (evt, path) => {
-      installsManager.removeInstallLocation(path)
+    ipcMain.handle('installs.remove', (evt, id) => {
+      installsManager.removeInstallLocation(id)
     });
     ipcMain.handle('installs.get', installsManager.getInstallLocations);
+    ipcMain.handle('installs.purge', (evt, id) => {
+      installsManager.purgeInstall(id)
+    });
     ipcMain.handle('installs.backup.add', (evt, id, path) => installsManager.setBackup(id, path));
     ipcMain.handle('installs.backup.remove', (evt, id) => installsManager.removeBackup(id));
 

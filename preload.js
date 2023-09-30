@@ -16,10 +16,11 @@ const directoryAPI = {
 
 const installsAPI = {
   add: (path) => ipcRenderer.invoke('installs.add', path),
-  remove: (path) => ipcRenderer.invoke('installs.remove', path),
+  remove: (id) => ipcRenderer.invoke('installs.remove', id),
   get: () => ipcRenderer.invoke('installs.get'),
   setBackup: (id, path) => ipcRenderer.invoke('installs.backup.add', id, path),
-  removeBackup: (id) => ipcRenderer.invoke('installs.backup.remove', id)
+  removeBackup: (id) => ipcRenderer.invoke('installs.backup.remove', id),
+  purge: (id) => ipcRenderer.invoke('installs.purge', id)
 }
 
 contextBridge.exposeInMainWorld('byecache', {
