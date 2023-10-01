@@ -65,8 +65,8 @@ jobs:
           username: ${{ secrets.ES_USERNAME }}
           password: ${{ secrets.ES_PASSWORD }}
           totp_secret: ${{ secrets.ES_TOTP_SECRET }}
-          file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/${{env.PROJECT_NAME}}.exe.jar
-                    
+          file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/${{env.PROJECT_NAME}}.exe
+
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
