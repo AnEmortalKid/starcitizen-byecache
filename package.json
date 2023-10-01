@@ -8,8 +8,9 @@
     "prettier:check": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write",
     "start": "electron-forge start",
+    "make": "electron-forge make",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "publish": "electron-forge publish"
   },
   "repository": {
     "type": "git",
