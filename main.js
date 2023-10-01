@@ -11,6 +11,4 @@ require("update-electron-app")({
 
 const bycacheApp = require("./byecache_app");
 
-// // TODO squirrel loader
-
 bycacheApp.runApp();

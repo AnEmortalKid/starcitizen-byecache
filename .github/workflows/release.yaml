@@ -1,0 +1,63 @@
+name: Release
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  create:
+jobs:
+  # publish_on_linux:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@master
+  #     with:
+  #       node-version: 14
+  #   - name: install dependencies
+  #     run: npm install
+  #   - name: publish
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     run: npm run publish
+
+  # publish_on_mac:
+  #   runs-on: macos-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@master
+  #     with:
+  #       node-version: 14
+  #   - name: install dependencies
+  #     run: npm install
+  #   - name: publish
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     run: npm run publish
+
+  publish_on_win:
+    # https://github.com/actions/runner/issues/1007#issuecomment-808904408
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+    # https://github.com/MadLittleMods/node-usb-detection/pull/165/files
+    runs-on: windows-2019
+    environment: ReleaseEnv
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 18
+      
+      # Even though we install a new version of node-gyp locally in
+      # the project, the CI always seems to use the npm bundled version of
+      # node-gyp. Even following the instructions from the docs, I could get it working
+      # on all other platforms except for Windows and npm@6, see
+      # - https://github.com/nodejs/node-gyp/blob/245cd5bbe4441d4f05e88f2fa20a86425419b6af/docs/Updating-npm-bundled-node-gyp.md
+      # - https://github.com/nodejs/node-gyp/blob/245cd5bbe4441d4f05e88f2fa20a86425419b6af/docs/Force-npm-to-use-global-node-gyp.md
+      # - name: "Install npm@^8 to get a more up to date bundled node-gyp"
+      - name: "Install npm"
+        # run: npm install --global npm@8.3.1
+        run: npm install
+      - name: install dependencies
+        run: npm ci
+      - name: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run publish
