@@ -9,7 +9,7 @@ An install location is a path to a StarCitizen environment folder, e.g. `C:\Prog
 1. Add a new location by specifiying it with the File Browser
 ![](../imgs/usage/add_install.png)
 2. The location should be the parent of the `USER` directory
-![](../imgs/usage/added_location.png)
+![](../imgs/usage/added_install.png)
 3. You can remove the location by selecting the "Remove install" button
 ![](../imgs/usage/remove_install.png) 
 
