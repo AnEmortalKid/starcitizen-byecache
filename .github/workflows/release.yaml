@@ -63,21 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish -- --dry-run
 
-      - name: Sign EXE with CodeSignTool
-        uses: sslcom/esigner-codesign@develop
-        with:
-          # Sign and timestamp code object.
-          command: sign
-          username: ${{ secrets.ES_USERNAME }}
-          password: ${{ secrets.ES_PASSWORD }}
-          credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
-          totp_secret: ${{ secrets.ES_TOTP_SECRET }}
-          file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/starcitizen-byecache.exe
-          override: true
-
-      # # TODO set app version dynamically
-      # # TODO need to delete dir
-      # - name: Sign Setup EXE with CodeSignTool
+      # - name: Sign EXE with CodeSignTool
       #   uses: sslcom/esigner-codesign@develop
       #   with:
       #     # Sign and timestamp code object.
@@ -86,8 +72,22 @@ jobs:
       #     password: ${{ secrets.ES_PASSWORD }}
       #     credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
       #     totp_secret: ${{ secrets.ES_TOTP_SECRET }}
-      #     file_path: ${GITHUB_WORKSPACE}/out/make/squirrel.windows/x64/starcitizen-byecache-0.1.0.Setup.exe
+      #     file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/starcitizen-byecache.exe
       #     override: true
+
+      # # TODO set app version dynamically
+      # # TODO need to delete dir
+      - name: Sign Setup EXE with CodeSignTool
+        uses: sslcom/esigner-codesign@develop
+        with:
+          # Sign and timestamp code object.
+          command: sign
+          username: ${{ secrets.ES_USERNAME }}
+          password: ${{ secrets.ES_PASSWORD }}
+          credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
+          totp_secret: ${{ secrets.ES_TOTP_SECRET }}
+          file_path: "${GITHUB_WORKSPACE}/out/make/squirrel.windows/x64/starcitizen-byecache-0.1.0 Setup.exe"
+          override: true
 
       - name: Publish
         env:
