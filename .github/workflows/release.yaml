@@ -51,15 +51,19 @@ jobs:
         with:
           node-version: 18
 
+      - name: Get app version
+        run: echo "APP_VERSION=$(npm pkg get version)" >> $GITHUB_ENV
+
       - run: npm ci
 
-      # - name: Publish Binaries
-      #   run: npm run publish
+      # TODO sign setup version when spaces are supported
+      - name: Publish Binaries
+        run: npm run publish
 
-      - name: Prepare publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run publish -- --dry-run
+      # - name: Prepare publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: npm run publish -- --dry-run
 
       # - name: Sign EXE with CodeSignTool
       #   uses: sslcom/esigner-codesign@develop
@@ -75,19 +79,19 @@ jobs:
 
       # TODO set app version dynamically
       # Name has a space and it breaks at the moment
-      - name: Sign Setup EXE with CodeSignTool
-        uses: sslcom/esigner-codesign@develop
-        with:
-          # Sign and timestamp code object.
-          command: sign
-          username: ${{ secrets.ES_USERNAME }}
-          password: ${{ secrets.ES_PASSWORD }}
-          credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
-          totp_secret: ${{ secrets.ES_TOTP_SECRET }}
-          file_path: "${GITHUB_WORKSPACE}/out/make/squirrel.windows/x64/starcitizen-byecache-0.1.0 Setup.exe"
-          override: true
+      # - name: Sign Setup EXE with CodeSignTool
+      #   uses: sslcom/esigner-codesign@develop
+      #   with:
+      #     # Sign and timestamp code object.
+      #     command: sign
+      #     username: ${{ secrets.ES_USERNAME }}
+      #     password: ${{ secrets.ES_PASSWORD }}
+      #     credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
+      #     totp_secret: ${{ secrets.ES_TOTP_SECRET }}
+      #     file_path: "${GITHUB_WORKSPACE}/out/make/squirrel.windows/x64/starcitizen-byecache-0.1.0 Setup.exe"
+      #     override: true
 
-      - name: Publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run publish -- --from-dry-run
+      # - name: Publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: npm run publish -- --from-dry-run
