@@ -36,6 +36,9 @@ jobs:
     # https://github.com/actions/runner/issues/1007#issuecomment-808904408
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
+    permissions:
+      contents: write
+
     # https://github.com/MadLittleMods/node-usb-detection/pull/165/files
     runs-on: windows-2019
     environment: ReleaseEnv
