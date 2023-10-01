@@ -27,4 +27,18 @@ module.exports = {
       config: {},
     },
   ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      platforms: ["win32"],
+      config: {
+        repository: {
+          owner: "AnEmortalKid",
+          name: "starcitizen-byecache",
+        },
+        prerelease: true,
+        draft: true,
+      },
+    },
+  ],
 };
