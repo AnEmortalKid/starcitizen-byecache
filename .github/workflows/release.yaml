@@ -53,6 +53,20 @@ jobs:
 
       - run: npm ci
 
+      - name: Prepare exe
+        # runs package and make
+        run: npm run make
+
+      - name: Sign EXE with CodeSignTool
+        uses: sslcom/esigner-codesign@develop
+        with:
+          # Sign and timestamp code object.
+          command: sign
+          username: ${{ secrets.ES_USERNAME }}
+          password: ${{ secrets.ES_PASSWORD }}
+          totp_secret: ${{ secrets.ES_TOTP_SECRET }}
+          file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/${{env.PROJECT_NAME}}.exe.jar
+                    
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
