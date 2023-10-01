@@ -57,9 +57,7 @@ jobs:
       # - name: Prepare exe
       #   # runs package and make
       #   run: npm run make
-
-
-
+      
       - name: Prepare publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -75,6 +73,19 @@ jobs:
           credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
           totp_secret: ${{ secrets.ES_TOTP_SECRET }}
           file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/starcitizen-byecache.exe
+          override: true
+
+      # TODO set app version dynamically
+      - name: Sign Setup EXE with CodeSignTool
+        uses: sslcom/esigner-codesign@develop
+        with:
+          # Sign and timestamp code object.
+          command: sign
+          username: ${{ secrets.ES_USERNAME }}
+          password: ${{ secrets.ES_PASSWORD }}
+          credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
+          totp_secret: ${{ secrets.ES_TOTP_SECRET }}
+          file_path: ${GITHUB_WORKSPACE}/out/make/squirrel.windowx/x64/starcitizen-byecache-0.1.0.Setup.exe
           override: true
 
       - name: Publish
