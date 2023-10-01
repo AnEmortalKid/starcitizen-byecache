@@ -16,3 +16,7 @@ Named after the beloved _iCache_.
 ## Usage
 
 See [usage](./docs/USAGE.md) for detailed instructions.
+
+## Downloading
+
+1. Navigate to the [releases](https://github.com/AnEmortalKid/starcitizen-byecache/releases) page and download the Setup executable from the latest release.
