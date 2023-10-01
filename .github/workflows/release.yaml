@@ -64,8 +64,10 @@ jobs:
           command: sign
           username: ${{ secrets.ES_USERNAME }}
           password: ${{ secrets.ES_PASSWORD }}
+          credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
           totp_secret: ${{ secrets.ES_TOTP_SECRET }}
           file_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/starcitizen-byecache.exe
+          output_path: ${GITHUB_WORKSPACE}/out/starcitizen-byecache-win32-x64/
 
       - name: publish
         env:
