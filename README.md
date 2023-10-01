@@ -12,3 +12,7 @@ Supports:
 ## Naming
 
 Named after the beloved _iCache_. 
+
+## Usage
+
+See [usage](./docs/USAGE.md) for detailed instructions.
