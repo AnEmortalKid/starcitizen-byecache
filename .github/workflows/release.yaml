@@ -58,6 +58,8 @@ jobs:
 
       # TODO sign setup version when spaces are supported
       - name: Publish Binaries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
 
       # - name: Prepare publish
