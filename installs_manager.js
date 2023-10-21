@@ -2,6 +2,7 @@ const { uuid } = require("uuidv4");
 const path = require("node:path");
 const fs = require("node:fs");
 
+const appLogger = require("./logger");
 const appSettings = require("./app_settings");
 const utils = require("./utils");
 
@@ -97,10 +98,23 @@ function getInstallLocations() {
  * @returns {...InstallManagerResponse} {@link InstallManagerResponse response} with the result of the operation
  */
 function setBackup(installId, backupPath) {
+  appLogger.info(
+    "[setBackup]",
+    "storing ",
+    backupPath,
+    "as backup for ",
+    installId,
+  );
+
   const installs = appSettings.get(locationsKey, []);
 
   const found = findById(installs, installId);
   if (!found) {
+    appLogger.info(
+      "[setBackup]",
+      "Could not find an install with id: ",
+      installId,
+    );
     return {
       success: false,
       error: "The provided install could not be found.",
@@ -126,6 +140,11 @@ function removeBackup(installId) {
 
   const found = findById(installs, installId);
   if (!found) {
+    appLogger.info(
+      "[removeBackup]",
+      "Could not find an install with id: ",
+      installId,
+    );
     return {
       success: false,
       error: "The provided install could not be found.",
@@ -152,14 +171,28 @@ function purgeInstall(installId) {
 
   const found = findById(installs, installId);
   if (!found) {
+    appLogger.info(
+      "[purgeInstall]",
+      "Could not find an install with id: ",
+      installId,
+    );
     return {
       success: false,
       error: "The provided install could not be found.",
     };
   }
 
+  appLogger.info("[purgeInstall]", "operating on", JSON.stringify(found));
+
   // only backup if we specified stuff
   if (found.backup) {
+    appLogger.info(
+      "[purgeInstall]",
+      "Backing up ",
+      found.location,
+      " to ",
+      found.backup,
+    );
     backupFiles(found.location, found.backup);
   }
 
@@ -174,10 +207,28 @@ function backupFiles(location, backup) {
   const mappingsDir = path.resolve(location, MAPPINGS_SUBDIRS);
 
   // if we purged previously, these won't exist
-  if (fs.existsSync(mappingsDir)) {
-    // copy and overwrite files
-    fs.cpSync(mappingsDir, backup, { force: true, recursive: true });
+  appLogger.info("[backupFiles]", "Searching for mappings ", mappingsDir);
+  if (!fs.existsSync(mappingsDir)) {
+    appLogger.info(
+      "[backupFiles]",
+      "Mappings directory did not exist in",
+      location,
+    );
+    return;
   }
+
+  // copy all files in that dir to the backup
+  const dirContents = fs.readdirSync(mappingsDir, { withFileTypes: true });
+  appLogger.info("[backupFiles]", "Backing up", dirContents.length, "files");
+
+  dirContents.forEach((dirent) => {
+    if (dirent.isFile()) {
+      const src = path.join(mappingsDir, dirent.name);
+      const dest = path.join(backup, dirent.name);
+      appLogger.info("[backupFiles]", "Copying", src, "to", dest);
+      fs.copyFileSync(src, dest);
+    }
+  });
 }
 
 module.exports = {

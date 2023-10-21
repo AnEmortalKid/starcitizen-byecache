@@ -1,10 +1,10 @@
 {
   "name": "starcitizen-byecache",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An app to delete StarCitizen's cache folders based on version.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "prettier:check": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write",
     "start": "electron-forge start",
@@ -26,6 +26,7 @@
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "electron": "^26.2.2",
+    "jest": "^29.7.0",
     "prettier": "3.0.3"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "electron-log": "^4.4.8",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
+    "fs-temp": "^2.0.1",
     "update-electron-app": "^2.0.1",
     "uuidv4": "^6.2.13"
   }
